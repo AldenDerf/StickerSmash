@@ -5,6 +5,7 @@ import * as ImagePicker from "expo-image-picker";
 import Button from "@/components/Button";
 import IconButton from "@/components/IconButton";
 import CircleButton from "@/components/CircleButton";
+import EmojiPicker from "@/components/EmojiPicker";
 
 const PlaceHolderImage = require("@/assets/images/background-image.jpg");
 
@@ -13,7 +14,7 @@ export default function Index() {
     undefined
   );
   const [showAppOptions, setShowAppOptions] = useState<boolean>(false);
-
+  const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
   const pickImageAsync = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ["images"],
@@ -34,8 +35,12 @@ export default function Index() {
   };
 
   const onAddSticker = () => {
-    // We will implement this later
+    setIsModalVisible(true);
   };
+
+  const onModalClose = () => {
+    setIsModalVisible(false);
+  }
 
   const onSaveImageAsync = async () => {
     // we will implement this later
@@ -74,6 +79,9 @@ export default function Index() {
           />
         </View>
       )}
+      <EmojiPicker isVisible={isModalVisible} onClose={onModalClose}>
+        {/* A list of emoji component will go here */}
+      </EmojiPicker>
     </View>
   );
 }
